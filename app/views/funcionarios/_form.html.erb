@@ -1,0 +1,44 @@
+<%= form_for(funcionario, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+  <% if funcionario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(funcionario.errors.count, "error") %> prohibited this funcionario from being saved:</h2>
+
+      <ul>
+      <% funcionario.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="nome">
+      <%= f.label :nome %>
+    </label>
+    <div class="col-sm-4">
+      <%= f.text_field :nome, class: "form-control", placeholder: "Nome do funcionário", autofocus: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cpf">
+      <%= f.label :cpf %>
+    </label>
+    <div class="col-sm-4"> 
+      <%= f.text_field :cpf, class: "form-control", placeholder: "CPF do funcionário" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cpf">
+      <%= f.label "Usuário" %>
+    </label>
+    <div class="col-sm-4"> 
+      <%= select("user_id", "user_id", User.all.collect {|u| [ u.email, u.id ] }, {include_blank: 'Selecionar'},  { :class => 'form-control' }) %>
+    </div>
+  </div>
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: 'btn btn-primary btn-sm' %>
+    </div>
+  </div>
+    
+<% end %>

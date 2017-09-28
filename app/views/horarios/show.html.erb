@@ -1,0 +1,40 @@
+<p>
+  <strong>Funcionário:</strong>
+  <%= @horario.funcionario.nome %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @horario.hora_extra ? "Hora extra" : "Compensado" %>
+</p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @horario.data.strftime("%d/%m/%Y") %>
+</p>
+
+<p>
+  <strong>Inicio:</strong>
+  <%= @horario.inicio %>
+</p>
+
+<p>
+  <strong>Fim:</strong>
+  <%= @horario.fim %>
+</p>
+
+<p>
+  <strong>Duração:</strong>
+  <%= @horario.total_horas %>
+</p>
+
+<p>
+  <strong>Motivo:</strong>
+  <%= @horario.motivo %>
+</p>
+
+<% if !@horario.hora_valida %>
+  <%= link_to 'Editar', edit_horario_path(@horario) %> |
+<% end %>
+
+<%= link_to 'Voltar', horarios_path %>

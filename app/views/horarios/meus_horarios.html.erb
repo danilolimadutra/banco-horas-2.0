@@ -1,0 +1,71 @@
+<h1>Meus Horários</h1>
+
+<%= link_to 'Novo horário', new_horario_path %>
+
+<br/>
+
+<%= will_paginate @horarios, renderer: BootstrapPagination::Rails %>
+
+<br/>
+
+<div class="container">
+  <h1>
+    <span class="label label-info">Extras: <%= number_with_precision( @total_extra, precision:2 ) %></span>
+    <span class="label label-warning">Compensado: <%= number_with_precision( @total_compensado, precision:2 ) %></span>
+    <% if @saldo_hora < 0 %>
+      <span class="label label-danger">Saldo: <%= number_with_precision( @saldo_hora, precision:2 ) %></span>
+    <% else %>
+      <span class="label label-success">Saldo: <%= number_with_precision( @saldo_hora, precision:2 ) %></span>
+    <% end %>
+  </h1>
+</div>
+
+<table  class="table">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Tipo</th>
+      <th>Inicio</th>
+      <th>Fim</th>
+      <th>Duração</th>
+      <th>Usuario</th>
+      <th>Funcionario</th>
+      <th>Situação</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @horarios.each do |horario| %>
+      <tr <%= !horario.hora_valida ? 'class=warning' : "" %> >
+        <td><%= horario.data ? horario.data.strftime("%d/%m/%Y") : '' %></td>
+        <td><%= horario.hora_extra ? 'Hora Extra' : 'Compensado' %></td>
+        <td><%= horario.inicio %></td>
+        <td><%= horario.fim %></td>
+        <td><%= number_with_precision( horario.total_horas, precision: 2) %></td>
+        <td><%= horario.user.username if horario.user %></td>
+        <td><%= horario.funcionario.nome if horario.funcionario %></td>      
+        <td>
+          <% if !horario.hora_valida %>
+            Pendente
+          <% else %>
+            Validado
+          <% end %>
+        </td>
+        <td><%= link_to 'Exibir', horario %></td>
+        <td>
+          <% if !horario.hora_valida %>
+            <%= link_to 'Editar', edit_horario_path(horario) %>
+          <% end %>
+        </td>
+        <td>
+          <% if !horario.hora_valida %>
+            <%= link_to 'Apagar', horario, method: :delete, data: { confirm: 'Você tem certeza?' } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @horarios, renderer: BootstrapPagination::Rails %>

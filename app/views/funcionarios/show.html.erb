@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @funcionario.nome %>
+</p>
+
+<p>
+  <strong>Cpf:</strong>
+  <%= @funcionario.cpf %>
+</p>
+
+<p>
+  <strong>Usuário:</strong>
+  <%= @funcionario.user.email %>
+</p>
+
+<%= link_to 'Editar', edit_funcionario_path(@funcionario) %> |
+<%= link_to 'Voltar', funcionarios_path %>
