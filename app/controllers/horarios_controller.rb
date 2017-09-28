@@ -3,7 +3,7 @@ require 'time'
 class HorariosController < ApplicationController
   before_action :set_horario, only: [:show, :edit, :update, :destroy, :validar_horario]
   before_action :require_user
-  before_action :require_funcionario, only: [:create, :meus_horarios]
+  before_action :require_funcionario, only: [:new, :meus_horarios]
 
   # GET /horarios
   # GET /horarios.json
