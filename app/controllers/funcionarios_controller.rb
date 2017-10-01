@@ -32,7 +32,10 @@ class FuncionariosController < ApplicationController
 
     respond_to do |format|
       if @funcionario.save
-        format.html { redirect_to @funcionario, notice: 'Funcionario was successfully created.' }
+        format.html { 
+          flash[:success] = 'Funcionário cadastrado com sucesso.'
+          redirect_to @funcionario
+          }
         format.json { render :show, status: :created, location: @funcionario }
       else
         format.html { render :new }
@@ -48,7 +51,10 @@ class FuncionariosController < ApplicationController
     
     respond_to do |format|
       if @funcionario.update(funcionario_params)
-        format.html { redirect_to @funcionario, notice: 'Funcionario was successfully updated.' }
+        format.html { 
+          flash[:success] = 'Funcionário atualizado com sucesso.'
+          redirect_to @funcionario
+        }
         format.json { render :show, status: :ok, location: @funcionario }
       else
         format.html { render :edit }
@@ -62,7 +68,10 @@ class FuncionariosController < ApplicationController
   def destroy
     @funcionario.destroy
     respond_to do |format|
-      format.html { redirect_to funcionarios_url, notice: 'Funcionario was successfully destroyed.' }
+      format.html { 
+        flash[:danger] = 'Funcionário excluído com sucesso.'
+        redirect_to funcionarios_url
+      }
       format.json { head :no_content }
     end
   end
