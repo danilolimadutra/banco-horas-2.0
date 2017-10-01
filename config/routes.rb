@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :funcionarios
+  
   # get 'pages/index'
   get 'about', to: 'pages#about'
   
@@ -21,6 +21,12 @@ Rails.application.routes.draw do
       post :validar_horario
       get :validar
       get :meus_horarios
+    end
+  end
+  
+  resources :funcionarios do
+    collection do
+      get :horarios
     end
   end
   

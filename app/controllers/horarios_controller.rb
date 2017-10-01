@@ -4,7 +4,9 @@ class HorariosController < ApplicationController
   before_action :set_horario, only: [:show, :edit, :update, :destroy, :validar_horario]
   before_action :require_user
   before_action :require_funcionario, only: [:new, :meus_horarios]
-
+  before_action :require_same_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_admin, only: [:index]
+  
   # GET /horarios
   # GET /horarios.json
   def index
@@ -22,7 +24,12 @@ class HorariosController < ApplicationController
   end
 
   # GET /horarios/1/edit
-  def edit
+  def edit      
+    #impedir edição de horário validado
+    if @horario.hora_valida 
+      flash[:danger] = "Você não pode editar um horário validado."
+      redirect_to meus_horarios_horarios_path
+    end
   end
 
   # POST /horarios
@@ -38,8 +45,10 @@ class HorariosController < ApplicationController
     
     respond_to do |format|
       if @horario.save
-        format.html { redirect_to @horario, notice: 'Horario was successfully created.' }
-        format.json { render :show, status: :created, location: @horario }
+        format.html { 
+          flash[:success] = 'Horário cadastrado com sucesso.'
+          redirect_to meus_horarios_horarios_path
+        }
       else
         format.html { render :new }
         format.json { render json: @horario.errors, status: :unprocessable_entity }
@@ -54,7 +63,10 @@ class HorariosController < ApplicationController
   
     respond_to do |format|
       if @horario.update(horario_params)
-        format.html { redirect_to @horario, notice: 'Horario was successfully updated.' }
+        format.html { 
+          flash[:success] = 'Horário atualizado com sucesso.'
+          redirect_to meus_horarios_horarios_path
+        }
         format.json { render :show, status: :ok, location: @horario }
       else
         format.html { render :edit }
@@ -68,7 +80,10 @@ class HorariosController < ApplicationController
   def destroy
     @horario.destroy
     respond_to do |format|
-      format.html { redirect_to horarios_url, notice: 'Horario was successfully destroyed.' }
+      format.html { 
+        flash[:danger] = 'Horários excluído com sucesso'
+        redirect_to meus_horarios_horarios_path
+      }
       format.json { head :no_content }
     end
   end
@@ -122,5 +137,12 @@ class HorariosController < ApplicationController
       hora_inicio = Time.parse(@horario.inicio)
       hora_fim = Time.parse(@horario.fim)
       @horario.total_horas = ( ( hora_fim - hora_inicio ) / 60 ) / 60
+    end
+    
+    def require_same_user
+      if @horario.user != current_user and !current_user.admin?
+        flash[:danger] = "Somente o dono tem permissão."
+        redirect_to root_path
+      end
     end
 end

@@ -58,7 +58,7 @@
   
   <div class="form-group"> 
     <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit onclick: "return validarForm()", class: 'btn btn-primary btn-sm' %>
+      <%= f.submit( @horario.new_record? ? "Cadastrar horário": "Atualizar horário", onclick: "return validarForm()", class: 'btn btn-primary' ) %>
     </div>
   </div>
 <% end %>

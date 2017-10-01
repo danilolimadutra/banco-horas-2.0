@@ -25,7 +25,7 @@
 
 <p>
   <strong>Duração:</strong>
-  <%= @horario.total_horas %>
+  <%= number_with_precision( @horario.total_horas, precision: 2 ) %>
 </p>
 
 <p>
@@ -34,7 +34,6 @@
 </p>
 
 <% if !@horario.hora_valida %>
-  <%= link_to 'Editar', edit_horario_path(@horario) %> |
+  <%= link_to 'Editar', edit_horario_path(@horario), class: 'btn btn-default' %>
 <% end %>
-
-<%= link_to 'Voltar', horarios_path %>
+<%= link_to 'Voltar', meus_horarios_horarios_path, class: 'btn btn-default' %>

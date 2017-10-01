@@ -1,12 +1,6 @@
 <h1>Meus Horários</h1>
 
-<%= link_to 'Novo horário', new_horario_path %>
-
-<br/>
-
 <%= will_paginate @horarios, renderer: BootstrapPagination::Rails %>
-
-<br/>
 
 <div class="container">
   <h1>
@@ -28,8 +22,6 @@
       <th>Inicio</th>
       <th>Fim</th>
       <th>Duração</th>
-      <th>Usuario</th>
-      <th>Funcionario</th>
       <th>Situação</th>
       <th colspan="3"></th>
     </tr>
@@ -43,8 +35,6 @@
         <td><%= horario.inicio %></td>
         <td><%= horario.fim %></td>
         <td><%= number_with_precision( horario.total_horas, precision: 2) %></td>
-        <td><%= horario.user.username if horario.user %></td>
-        <td><%= horario.funcionario.nome if horario.funcionario %></td>      
         <td>
           <% if !horario.hora_valida %>
             Pendente

@@ -1,6 +1,6 @@
 class FuncionariosController < ApplicationController
   before_action :set_funcionario, only: [:show, :edit, :update, :destroy]
-  before_action :require_user
+  before_action :require_admin
   
 
   # GET /funcionarios
@@ -76,6 +76,10 @@ class FuncionariosController < ApplicationController
     end
   end
 
+  def horarios
+  
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_funcionario
