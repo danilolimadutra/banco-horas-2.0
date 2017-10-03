@@ -1,0 +1,46 @@
+<%= will_paginate @horarios, renderer: BootstrapPagination::Rails %>
+
+<table  class="table">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Tipo</th>
+      <th>Inicio</th>
+      <th>Fim</th>
+      <th>Duração</th>
+      <th>Usuario</th>
+      <th>Funcionario</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @horarios.each do |horario| %>
+      <tr>
+        <td><%= horario.data ? horario.data.strftime("%d/%m/%Y") : '' %></td>
+        <td><%= horario.hora_extra ? 'Hora Extra' : 'Compensado' %></td>
+        <td><%= horario.inicio %></td>
+        <td><%= horario.fim %></td>
+        <td><%= number_with_precision( horario.total_horas, precision: 2) %></td>
+        <td><%= horario.user.username if horario.user %></td>
+        <td><%= horario.funcionario.nome if horario.funcionario %></td>      
+        <td><%= link_to 'Exibir', horario %></td>
+        <td>
+          <% if !horario.hora_valida %>
+            <%= link_to 'Editar', edit_horario_path(horario) %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Apagar', horario, method: :delete, data: { confirm: 'Você tem certeza?' } %></td>
+        <td>
+          <% if !horario.hora_valida %>
+            <%= button_to "Validar", { controller: "horarios", action: "validar_horario", id: horario.id }, class: "btn btn-primary btn-xs", method: :post %>
+          <% else %>
+            Validado
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @horarios, renderer: BootstrapPagination::Rails %>

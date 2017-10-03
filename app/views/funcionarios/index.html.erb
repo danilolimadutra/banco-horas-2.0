@@ -15,7 +15,7 @@
   <tbody>
     <% @funcionarios.each do |funcionario| %>
       <tr>
-        <td><%= funcionario.nome %></td>
+        <td><%= link_to funcionario.nome, controller: "funcionarios", action: "horarios", id: funcionario %></td>
         <td><%= funcionario.cpf %></td>
         <td><%= funcionario.user ? funcionario.user.email : ""  %></td>
         <td><%= link_to 'Exibir', funcionario %></td>

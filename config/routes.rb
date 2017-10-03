@@ -26,9 +26,13 @@ Rails.application.routes.draw do
   
   resources :funcionarios do
     collection do
-      get :horarios
+      get ':id/horarios', to: 'funcionarios#horarios'
     end
   end
+  
+  #resources :funcionarios do
+    #resources :horarios
+  #end
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -1,5 +1,5 @@
 class FuncionariosController < ApplicationController
-  before_action :set_funcionario, only: [:show, :edit, :update, :destroy]
+  before_action :set_funcionario, only: [:show, :edit, :update, :destroy, :horarios]
   before_action :require_admin
   
 
@@ -77,7 +77,7 @@ class FuncionariosController < ApplicationController
   end
 
   def horarios
-  
+    @horarios = @funcionario.horarios.paginate(page: params[:page], per_page: 20).order('data DESC')
   end
   
   private
