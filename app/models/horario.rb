@@ -4,6 +4,6 @@ class Horario < ApplicationRecord
   validates :data, presence: true
   validates :inicio, presence: true
   validates :fim, presence: true
-  validates :motivo, presence: true, length: { minimum: 3, maximum: 50 }
+  validates :motivo, presence: true, length: { minimum: 5 }
   
 end

@@ -41,7 +41,7 @@ class HorariosController < ApplicationController
     set_funcionario
     @horario.funcionario_id = @funcionario.id
     
-    total_horas
+    @horario.total_horas = total_horas
     
     respond_to do |format|
       if @horario.save
@@ -59,10 +59,11 @@ class HorariosController < ApplicationController
   # PATCH/PUT /horarios/1
   # PATCH/PUT /horarios/1.json
   def update
-    total_horas
+    params_update = horario_params
+    params_update[:total_horas] = total_horas
   
     respond_to do |format|
-      if @horario.update(horario_params)
+      if @horario.update(params_update)
         format.html { 
           flash[:success] = 'Horário atualizado com sucesso.'
           redirect_to meus_horarios_horarios_path
@@ -134,9 +135,9 @@ class HorariosController < ApplicationController
     end
     
     def total_horas
-      hora_inicio = Time.parse(@horario.inicio)
-      hora_fim = Time.parse(@horario.fim)
-      @horario.total_horas = ( ( hora_fim - hora_inicio ) / 60 ) / 60
+      hora_inicio = Time.parse(params[:horario][:inicio])
+      hora_fim = Time.parse(params[:horario][:fim])
+      total_horas = ( ( hora_fim - hora_inicio ) / 60 ) / 60
     end
     
     def require_same_user

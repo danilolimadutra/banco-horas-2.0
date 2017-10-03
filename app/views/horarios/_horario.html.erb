@@ -1,3 +1,10 @@
+<script>
+  $(document).ready(function(){
+      $('[data-toggle="popover"]').popover(); 
+  });
+</script>
+
+
 <%= will_paginate @horarios, renderer: BootstrapPagination::Rails %>
 
 <table  class="table">
@@ -8,6 +15,7 @@
       <th>Inicio</th>
       <th>Fim</th>
       <th>Duração</th>
+      <th>Motivo</th>
       <th>Usuario</th>
       <th>Funcionario</th>
       <th colspan="4"></th>
@@ -22,6 +30,7 @@
         <td><%= horario.inicio %></td>
         <td><%= horario.fim %></td>
         <td><%= number_with_precision( horario.total_horas, precision: 2) %></td>
+        <td><a data-toggle="popover" title="Motivo completo" data-content="<%= horario.motivo %>"><%= horario.motivo.truncate(20) %></a></td>
         <td><%= horario.user.username if horario.user %></td>
         <td><%= horario.funcionario.nome if horario.funcionario %></td>      
         <td><%= link_to 'Exibir', horario %></td>
