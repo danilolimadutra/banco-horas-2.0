@@ -16,10 +16,10 @@
       <%= f.label "Tipo" %>
     </label>
     <div class="col-sm-2"> 
-      <%= f.select :hora_extra, [['Hora extra', 1], ['Compensado', 0]], { :include_blank => 'Selecione' }, { :class => 'form-control' }  %>
+      <%= f.select( :hora_extra, options_for_select({ "Hora extra" => true, "Compensado" => false }, horario.hora_extra), { :include_blank => 'Selecione' }, { :class => 'form-control' }  ) %>
     </div>
   </div>
- 
+  
   <div class="form-group">
     <label class="control-label col-sm-2" for="data">
       <%= f.label :data %>
@@ -34,7 +34,7 @@
       <%= f.label :inicio %>
     </label>
     <div class="col-sm-2"> 
-      <%= f.time_field :inicio, class: "form-control" %>
+      <%= f.time_field :inicio, class: "form-control", :value => horario.inicio %>
     </div>
   </div>
   
@@ -43,7 +43,7 @@
       <%= f.label :fim %>
     </label>
     <div class="col-sm-2"> 
-      <%= f.time_field :fim, class: "form-control" %>
+      <%= f.time_field :fim, class: "form-control", :value => horario.fim %>
     </div>
   </div>
   

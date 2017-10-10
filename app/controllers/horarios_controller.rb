@@ -123,6 +123,8 @@ class HorariosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_horario
       @horario = Horario.find(params[:id])
+      #@horario.inicio = "00:01"
+
     end
     
     def set_funcionario
