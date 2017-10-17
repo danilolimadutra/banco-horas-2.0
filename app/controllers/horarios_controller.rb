@@ -113,9 +113,14 @@ class HorariosController < ApplicationController
     set_funcionario
     @horarios = @funcionario.horarios.paginate(page: params[:page], per_page: 20).order('data DESC')
     
-    @total_extra =  @funcionario.horarios.where(:hora_extra => true).sum('total_horas')
+    @total_extra = @funcionario.horarios.where(:hora_extra => true).sum('total_horas')
+    
     @total_compensado = @funcionario.horarios.where(:hora_extra => false).sum('total_horas')
+    
     @saldo_hora = @total_extra - @total_compensado
+    
+    #historico_mensal
+    
   end
 
 
@@ -146,6 +151,25 @@ class HorariosController < ApplicationController
       if @horario.user != current_user and !current_user.admin?
         flash[:danger] = "Somente o dono tem permissão."
         redirect_to root_path
+      end
+    end
+    
+    def historico_mensal
+      date = Time.current - 6.month
+      @horarios = @funcionario.horarios.where("data >= :start_date", start_date: date)
+      
+      i = 0
+      @totais_mensais = Hash.new
+      
+      while i < 7 do
+        extra = 1
+        compensado = 2
+        saldo = 3
+        
+        @totais_mensais[date.strftime("%F")] = [extra, compensado, saldo]
+
+        date += 1.month 
+        i += 1
       end
     end
 end

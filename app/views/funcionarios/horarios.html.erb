@@ -2,12 +2,12 @@
 
 <div class="container">
   <h1>
-    <span class="label label-info">Extras: <%= number_with_precision( @total_extra, precision:2 ) %></span>
-    <span class="label label-warning">Compensado: <%= number_with_precision( @total_compensado, precision:2 ) %></span>
+    <span class="label label-info">Extras: <%= float_para_hora(@total_extra) %></span>
+    <span class="label label-warning">Compensado: <%= float_para_hora(@total_compensado) %></span>
     <% if @saldo_hora < 0 %>
-      <span class="label label-danger">Saldo: <%= number_with_precision( @saldo_hora, precision:2 ) %></span>
+      <span class="label label-danger">Saldo: <%= float_para_hora(@saldo_hora) %></span>
     <% else %>
-      <span class="label label-success">Saldo: <%= number_with_precision( @saldo_hora, precision:2 ) %></span>
+      <span class="label label-success">Saldo: <%= float_para_hora(@saldo_hora) %></span>
     <% end %>
   </h1>
 </div>

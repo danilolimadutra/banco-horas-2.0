@@ -29,7 +29,7 @@
         <td><%= horario.hora_extra ? 'Hora Extra' : 'Compensado' %></td>
         <td><%= horario.inicio %></td>
         <td><%= horario.fim %></td>
-        <td><%= number_with_precision( horario.total_horas, precision: 2) %></td>
+        <td><%= float_para_hora(horario.total_horas) %></td>
         <td><a data-toggle="popover" title="Motivo completo" data-content="<%= horario.motivo %>"><%= horario.motivo.truncate(20) %></a></td>
         <td><%= horario.user.username if horario.user %></td>
         <td><%= link_to horario.funcionario.nome, controller: "funcionarios", action: "horarios", id: horario.funcionario %></td>
