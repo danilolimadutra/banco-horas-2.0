@@ -6,7 +6,7 @@ module ApplicationHelper
     image_tag(gravatar_url, alt: user.username, class: "img-circle")
   end
   
-  def float_para_hora hora_decimal
+  def float_para_hora_old hora_decimal
       fracao_hora = hora_decimal.to_i
       decimal_minuto = hora_decimal - fracao_hora
       
@@ -26,4 +26,20 @@ module ApplicationHelper
       
       return hora_completa
     end
+    
+  def float_para_hora hora_decimal
+    hora_decimal = hora_decimal*60*60
+    mm, ss = hora_decimal.divmod(60)
+    hh, mm = mm.divmod(60)
+    dd, hh = hh.divmod(9)
+    hora = "%d:%d" % [hh, mm]
+    
+    dias = "%d" % [dd]
+    if dias.to_i > 0
+      dias = "%d dias, " % [dd]
+      hora = dias+hora
+    end
+    
+    return hora
+  end
 end

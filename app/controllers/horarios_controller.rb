@@ -113,9 +113,11 @@ class HorariosController < ApplicationController
     set_funcionario
     @horarios = @funcionario.horarios.paginate(page: params[:page], per_page: 20).order('data DESC')
     
-    @total_extra = @funcionario.horarios.where(:hora_extra => true).sum('total_horas').round(2)
+    @total_extra = @funcionario.horarios.where(:hora_extra => true).sum('total_horas')
     
-    @total_compensado = @funcionario.horarios.where(:hora_extra => false).sum('total_horas').round(2)
+    @teste = @funcionario.horarios.where(:hora_extra => true).sum('total_horas')
+    
+    @total_compensado = @funcionario.horarios.where(:hora_extra => false).sum('total_horas')
     
     @saldo_hora = @total_extra - @total_compensado
     

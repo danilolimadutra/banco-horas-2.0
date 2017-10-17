@@ -1,13 +1,13 @@
 <h1>Horários de <%= @funcionario.nome %></h1>
 
 <div class="container">
-  <h1>
-    <span class="label label-info">Extras <%= float_para_hora(@total_extra) %></span>
-    <span class="label label-warning">Compensado <%= float_para_hora(@total_compensado) %></span>
+  <h2>
+    <span class="label label-info">Extras: <%= float_para_hora(@total_extra) + " h" %></span>
+    <span class="label label-warning">Compensado: <%= float_para_hora(@total_compensado) + " h" %></span>
     <% if @saldo_hora < 0 %>
-      <span class="label label-danger">Saldo <%= float_para_hora(@saldo_hora) %></span>
+      <span class="label label-danger">Saldo: <%= float_para_hora(@saldo_hora) + " h" %></span>
     <% else %>
-      <span class="label label-success">Saldo <%= float_para_hora(@saldo_hora) %></span>
+      <span class="label label-success">Saldo: <%= float_para_hora(@saldo_hora) + " h" %></span>
     <% end %>
   </h1>
 </div>
