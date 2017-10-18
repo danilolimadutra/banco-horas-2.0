@@ -29,7 +29,16 @@ module ApplicationHelper
     
   def float_para_hora hora_decimal
     hora_decimal = hora_decimal*60*60
-    mm, ss = hora_decimal.divmod(60)
+    mm, ss = hora_decimal.round.divmod(60)
+    hh, mm = mm.divmod(60)
+    hora = "%d:%d" % [hh, mm]
+    
+    return hora
+  end
+  
+  def float_para_dia_hora hora_decimal
+    hora_decimal = hora_decimal*60*60
+    mm, ss = hora_decimal.round.divmod(60)
     hh, mm = mm.divmod(60)
     dd, hh = hh.divmod(9)
     hora = "%d:%d" % [hh, mm]
