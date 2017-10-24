@@ -31,9 +31,18 @@ module ApplicationHelper
     hora_decimal = hora_decimal*60*60
     mm, ss = hora_decimal.round.divmod(60)
     hh, mm = mm.divmod(60)
-    hora = "%d:%d" % [hh, mm]
+
+    hora = "%d" % [hh]
+    if hora.length == 1
+      hora = "0"+hora
+    end
     
-    return hora
+    minuto = "%d" % [mm]
+    if minuto.length == 1
+      minuto = "0"+minuto
+    end
+
+    return hora + ":" + minuto
   end
   
   def float_para_dia_hora hora_decimal
