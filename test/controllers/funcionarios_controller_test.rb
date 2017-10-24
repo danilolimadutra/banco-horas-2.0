@@ -17,7 +17,7 @@ class FuncionariosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create funcionario" do
     assert_difference('Funcionario.count') do
-      post funcionarios_url, params: { funcionario: { cpf: @funcionario.cpf, nome: @funcionario.nome } }
+      post funcionarios_url, params: { funcionario: { cpf: @funcionario.cpf, nome: @funcionario.nome, user_id: @user } }
     end
 
     assert_redirected_to funcionario_url(Funcionario.last)
