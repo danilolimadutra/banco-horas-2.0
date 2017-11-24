@@ -1,7 +1,7 @@
 class FuncionariosController < ApplicationController
   before_action :set_funcionario, only: [:show, :edit, :update, :destroy, :horarios]
   before_action :require_admin
-  
+
 
   # GET /funcionarios
   # GET /funcionarios.json
@@ -28,12 +28,12 @@ class FuncionariosController < ApplicationController
   # POST /funcionarios.json
   def create
     @funcionario = Funcionario.new(funcionario_params)
-    
+
     @funcionario.user_id = params[:user_id][:user_id]
 
     respond_to do |format|
       if @funcionario.save
-        format.html { 
+        format.html {
           flash[:success] = 'Funcionário cadastrado com sucesso.'
           redirect_to @funcionario
           }
@@ -49,10 +49,10 @@ class FuncionariosController < ApplicationController
   # PATCH/PUT /funcionarios/1.json
   def update
     @funcionario.user_id = params[:user_id][:user_id]
-    
+
     respond_to do |format|
       if @funcionario.update(funcionario_params)
-        format.html { 
+        format.html {
           flash[:success] = 'Funcionário atualizado com sucesso.'
           redirect_to @funcionario
         }
@@ -69,7 +69,7 @@ class FuncionariosController < ApplicationController
   def destroy
     @funcionario.destroy
     respond_to do |format|
-      format.html { 
+      format.html {
         flash[:danger] = 'Funcionário excluído com sucesso.'
         redirect_to funcionarios_url
       }
@@ -79,12 +79,14 @@ class FuncionariosController < ApplicationController
 
   def horarios
     @horarios = @funcionario.horarios.paginate(page: params[:page], per_page: 20).order('data DESC')
-    
+
     @total_extra =  @funcionario.horarios.where(:hora_extra => true).sum('total_horas')
     @total_compensado = @funcionario.horarios.where(:hora_extra => false).sum('total_horas')
     @saldo_hora = @total_extra - @total_compensado
+
+    @historico = historico_mensal @funcionario
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_funcionario

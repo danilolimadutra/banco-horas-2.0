@@ -121,7 +121,7 @@ class HorariosController < ApplicationController
 
     @saldo_hora = @total_extra - @total_compensado
 
-    @historico = historico_mensal
+    @historico = historico_mensal @funcionario
 
   end
 
@@ -154,34 +154,5 @@ class HorariosController < ApplicationController
         flash[:danger] = "Somente o dono tem permissão."
         redirect_to root_path
       end
-    end
-
-    def historico_mensal
-      date = Time.now
-      ano = date.strftime("%Y")
-      mes = date.strftime("%m")
-      data_inicio = Date.new(ano.to_i, mes.to_i, 1) - 5.month
-
-      i = 0
-      acumulado = 0
-      lista_datas = {}
-      totais_mensal = {}
-
-      while i < 6 do
-        data_fim = data_inicio + 1.month - 1.day
-
-        data = data_inicio.strftime("%m/%Y")
-        extra = @funcionario.horarios.where("hora_extra = ? and data between ? and ?", true, data_inicio, data_fim).sum("total_horas")
-        compensado = @funcionario.horarios.where("hora_extra = ? and data between ? and ?", false, data_inicio, data_fim).sum("total_horas")
-        saldo = extra - compensado
-        acumulado = acumulado + saldo
-
-        lista_datas[i] = [data, extra, compensado, saldo, acumulado]
-
-        data_inicio = data_inicio + 1.month
-        i += 1
-      end
-
-      return lista_datas
     end
 end

@@ -1,15 +1,3 @@
 <h1>Horários de <%= @funcionario.nome %></h1>
 
-<div class="container">
-  <h2>
-    <span class="label label-info">Extras: <%= float_para_hora(@total_extra) %></span>
-    <span class="label label-warning">Compensado: <%= float_para_hora(@total_compensado) %></span>
-    <% if @saldo_hora < 0 %>
-      <span class="label label-danger">Saldo: <%= float_para_hora(@saldo_hora) %></span>
-    <% else %>
-      <span class="label label-success">Saldo: <%= float_para_hora(@saldo_hora) %></span>
-    <% end %>
-  </h1>
-</div>
-
 <%= render 'horarios/horario', obj: @horarios %>

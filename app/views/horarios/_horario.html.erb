@@ -1,9 +1,10 @@
 <script>
   $(document).ready(function(){
-      $('[data-toggle="popover"]').popover(); 
+      $('[data-toggle="popover"]').popover();
   });
 </script>
 
+<%= render 'horarios/historico', historico: @historico %>
 
 <%= will_paginate @horarios, renderer: BootstrapPagination::Rails %>
 
@@ -33,7 +34,7 @@
         <td><a data-toggle="popover" title="Motivo completo" data-content="<%= horario.motivo %>"><%= horario.motivo.truncate(20) %></a></td>
         <td><%= horario.user.username if horario.user %></td>
         <td><%= link_to horario.funcionario.nome, controller: "funcionarios", action: "horarios", id: horario.funcionario %></td>
-        
+
         <td><%= link_to 'Exibir', horario %></td>
         <td>
           <% if !horario.hora_valida %>

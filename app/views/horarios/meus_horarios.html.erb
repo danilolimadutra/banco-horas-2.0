@@ -4,65 +4,13 @@
   });
 </script>
 
-
 <h1>Meus Horários</h1>
 
-<div class="container">
-  <h2>
-    <span class="label label-info">Extras: <%= float_para_hora(@total_extra) %></span>
-    <span class="label label-warning">Compensado: <%= float_para_hora(@total_compensado) %></span>
-    <% if @saldo_hora < 0 %>
-      <span class="label label-danger">Saldo: <%= float_para_hora(@saldo_hora) %></span>
-    <% else %>
-      <span class="label label-success">Saldo: <%= float_para_hora(@saldo_hora) %></span>
-    <% end %>
-    <button data-toggle="collapse" data-target="#historico" class="btn">Detalhar</button>
-  </h1>
-</div>
-
-<div id="historico" class="collapse">
-  <table  class="table">
-    <thead>
-      <tr>
-        <th>Mês</th>
-        <th>Extra</th>
-        <th>Compensado</th>
-        <th>Saldo</th>
-        <th>Saldo Acumulado</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% i = 0  %>
-      <% while i < 6 do %>
-        <tr>
-          <td><%= @historico[i][0] %></td>
-          <td><%= float_para_hora(@historico[i][1]) %></td>
-          <td><%= float_para_hora(@historico[i][2]) %></td>
-          <td>
-            <% if @historico[i][3] < 0 %>
-              <%= "- " + float_para_hora(@historico[i][3].abs) %>
-            <% else %>
-              <%= float_para_hora(@historico[i][3]) %>
-            <% end %>
-          </td>
-          <td>
-            <% if @historico[i][4] < 0 %>
-              <%= "- " + float_para_hora(@historico[i][4].abs) %>
-            <% else %>
-              <%= float_para_hora(@historico[i][4]) %>
-            <% end %>
-          </td>
-        </tr>
-        <% i+= 1 %>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<%= render 'historico' %>
 
 <%= will_paginate @horarios, renderer: BootstrapPagination::Rails %>
 
-<table  class="table">
+<table  class="table table-hover">
   <thead>
     <tr>
       <th>Data</th>
