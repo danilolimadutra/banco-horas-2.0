@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
 
     while i < 6 do
       data_fim = data_inicio + 1.month - 1.day
-      
+
       if i == 0
         data = "Meses anteriores"
       else
