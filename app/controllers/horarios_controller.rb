@@ -111,7 +111,22 @@ class HorariosController < ApplicationController
 
   def meus_horarios
     set_funcionario
-    @horarios = @funcionario.horarios.paginate(page: params[:page], per_page: 20).order('data DESC')
+
+    if params[:hora_extra] == "true"
+      hora_extra = true
+    elsif params[:hora_extra] == "false"
+      hora_extra = false
+    end
+
+    if params[:data].present? and params[:hora_extra].present?
+      @horarios = @funcionario.horarios.where("hora_extra = ? and data = ?", hora_extra, params[:data]).paginate(page: params[:page], per_page: 20).order('data DESC')
+    elsif params[:data].present?
+      @horarios = @funcionario.horarios.where("data = ?", params[:data]).paginate(page: params[:page], per_page: 20).order('data DESC')
+    elsif params[:hora_extra].present?
+      @horarios = @funcionario.horarios.where("hora_extra = ?", hora_extra).paginate(page: params[:page], per_page: 20).order('data DESC')
+    else
+      @horarios = @funcionario.horarios.paginate(page: params[:page], per_page: 20).order('data DESC')
+    end
 
     @total_extra = @funcionario.horarios.where(:hora_extra => true).sum('total_horas')
 
