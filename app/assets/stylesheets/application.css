@@ -14,6 +14,11 @@
  *= require_self
  */
 
-#pesquisa-horario {
-  padding-top: 10px 
-}
+ .form-pesquisa {
+   margin-top: 24px;
+   float: right;
+ }
+
+ .historico-horas {
+   margin-bottom: 24px;
+ }
