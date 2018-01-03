@@ -4,28 +4,29 @@
   });
 </script>
 
-<h1>Meus Horários</h1>
-
-<%= render 'historico' %>
-
-<div id="pesquisa-horario">
-  <%= form_tag meus_horarios_horarios_path, method: :get, id: "pesquisa-horario-form" do %>
-    <div class="form-group row no-padding text-center col-md-9">
-      <div class="col-md-3">
+<div class="row">
+  <div class="col-sm-4">
+    <h1>Meus Horários</h1>
+  </div>
+  <div class="col-sm-8 form-pesquisa">
+    <%= form_tag meus_horarios_horarios_path, method: :get, id: "pesquisa-horario-form" do %>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-4">
         <%= date_field_tag :data, params[:data], autofocus: true, class: "form-control search-box" %>
       </div>
-      <div class="col-md-3">
+      <div class="col-sm-4">
         <%= select_tag :hora_extra, options_for_select([["Todos" , ""], ["Hora extra" , true], ["Compensado", false]]), { :class => 'form-control' } %>
       </div>
-      <div class="col-md-2">
+      <div class="col-sm-2">
         <%= button_tag(type: :submit, class: "btn btn-success") do %>
           <i class="fa fa-search"></i> Pesquisar
         <% end %>
       </div>
-    </div>
-
-  <% end %>
+    <% end %>
+  </div>
 </div>
+
+<%= render 'historico' %>
 
 <%= will_paginate @horarios, renderer: BootstrapPagination::Rails %>
 
