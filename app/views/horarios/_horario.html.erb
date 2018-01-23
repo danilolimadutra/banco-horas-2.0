@@ -12,6 +12,7 @@
   <thead>
     <tr>
       <th>Data</th>
+      <th>Sem.</th>
       <th>Tipo</th>
       <th>Inicio</th>
       <th>Fim</th>
@@ -27,6 +28,7 @@
     <% @horarios.each do |horario| %>
       <tr>
         <td><%= horario.data ? horario.data.strftime("%d/%m/%Y") : '' %></td>
+        <td><%= dia_semana horario.data.wday %></td>
         <td><%= horario.hora_extra ? 'Hora Extra' : 'Compensado' %></td>
         <td><%= horario.inicio %></td>
         <td><%= horario.fim %></td>

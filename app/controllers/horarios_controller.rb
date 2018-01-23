@@ -159,9 +159,15 @@ class HorariosController < ApplicationController
     end
 
     def total_horas
+      data = Time.parse(params[:horario][:data])
       hora_inicio = Time.parse(params[:horario][:inicio])
       hora_fim = Time.parse(params[:horario][:fim])
       total_horas = ( ( hora_fim - hora_inicio ) / 60 ) / 60
+
+      #calcular 100% para horas no domingo
+      if data.wday == 0
+        total_horas = total_horas*2
+      end
     end
 
     def require_same_user
