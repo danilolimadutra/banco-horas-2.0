@@ -168,6 +168,8 @@ class HorariosController < ApplicationController
       if data.wday == 0
         total_horas = total_horas*2
       end
+
+      return total_horas
     end
 
     def require_same_user
