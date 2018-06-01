@@ -11,6 +11,17 @@
     </div>
   <% end %>
 
+  <% if current_user.admin? && action_name == 'new' %>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="funcionario">
+        <%= f.label "Funcionário" %>
+      </label>
+      <div class="col-sm-4">
+        <%= select("horario", "funcionario_id", Funcionario.all.collect {|f| [ f.nome, f.id ] }, {selected: current_user.funcionario.id},  { :class => 'form-control' }) %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <label class="control-label col-sm-2" for="data">
       <%= f.label "Tipo" %>
