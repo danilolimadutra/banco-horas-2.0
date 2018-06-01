@@ -10,11 +10,26 @@
       </ul>
     </div>
   <% end %>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> parent of 1bd456f... permissão para admin criar horario para outro funcionario
+=======
+ 
+>>>>>>> parent of 1bd456f... permissão para admin criar horario para outro funcionario
+=======
+ 
+>>>>>>> parent of 1bd456f... permissão para admin criar horario para outro funcionario
   <div class="form-group">
     <label class="control-label col-sm-2" for="data">
       <%= f.label "Tipo" %>
     </label>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     <div class="col-sm-4">
       <div class="radio-inline">
         <label class="form-check-label radio-horarios">
@@ -24,46 +39,54 @@
           <%= f.radio_button :hora_extra, false %>Compensado
         </label>
       </div>
+=======
+=======
+>>>>>>> parent of 1bd456f... permissão para admin criar horario para outro funcionario
+=======
+>>>>>>> parent of 1bd456f... permissão para admin criar horario para outro funcionario
+    <div class="col-sm-2"> 
+      <%= f.select( :hora_extra, options_for_select({ "Hora extra" => true, "Compensado" => false }, horario.hora_extra), { :include_blank => 'Selecione' }, { :class => 'form-control' }  ) %>
+>>>>>>> parent of 1bd456f... permissão para admin criar horario para outro funcionario
     </div>
   </div>
-
+  
   <div class="form-group">
     <label class="control-label col-sm-2" for="data">
       <%= f.label :data %>
     </label>
-    <div class="col-sm-2">
+    <div class="col-sm-2"> 
       <%= f.date_field :data, class: "form-control" %>
     </div>
   </div>
-
+  
   <div class="form-group">
     <label class="control-label col-sm-2" for="inicio">
       <%= f.label :inicio %>
     </label>
-    <div class="col-sm-2">
+    <div class="col-sm-2"> 
       <%= f.time_field :inicio, class: "form-control", :value => horario.inicio %>
     </div>
   </div>
-
+  
   <div class="form-group">
     <label class="control-label col-sm-2" for="fim">
       <%= f.label :fim %>
     </label>
-    <div class="col-sm-2">
+    <div class="col-sm-2"> 
       <%= f.time_field :fim, class: "form-control", :value => horario.fim %>
     </div>
   </div>
-
+  
   <div class="form-group">
     <label class="control-label col-sm-2" for="motivo">
       <%= f.label :motivo %>
     </label>
-    <div class="col-sm-8">
+    <div class="col-sm-8"> 
       <%= f.text_field :motivo, class: "form-control", placeholder: "Motivo da hora extra" %>
     </div>
   </div>
-
-  <div class="form-group">
+  
+  <div class="form-group"> 
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit( @horario.new_record? ? "Cadastrar horário": "Atualizar horário", onclick: "return validarForm()", class: 'btn btn-primary' ) %>
     </div>
