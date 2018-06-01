@@ -38,10 +38,8 @@ class HorariosController < ApplicationController
     @horario = Horario.new(horario_params)
     @horario.user = current_user
 
-    if !horario_params[:funcionario_id]
-      set_funcionario
-      @horario.funcionario_id = @funcionario.id
-    end
+    set_funcionario
+    @horario.funcionario_id = @funcionario.id
 
     @horario.total_horas = total_horas
 
@@ -157,7 +155,7 @@ class HorariosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def horario_params
-      params.require(:horario).permit(:data, :inicio, :fim, :motivo, :hora_extra, :funcionario_id)
+      params.require(:horario).permit(:data, :inicio, :fim, :motivo, :hora_extra)
     end
 
     def total_horas
